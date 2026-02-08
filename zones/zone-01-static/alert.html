@@ -37,7 +37,7 @@
 
         <!-- Goal -->
         <div class="bg-blue-600 text-white p-4 md:p-6 rounded-xl mb-6 md:mb-8 shadow-lg">
-            <h2 class="text-xl md:text-2xl font-bold mb-2">🎯 Goal</h2>
+            <h2 class="text-xl md:text-2xl font-medium mb-2">🎯 Goal</h2>
             <p class="text-base md:text-lg">Create a success alert with flexbox layout, colors, and proper spacing</p>
         </div>
 
@@ -46,23 +46,23 @@
 
             <!-- Code Editor -->
             <div>
-                <h3 class="text-base md:text-lg font-bold mb-3 text-gray-800">✏️ Edit the Code</h3>
+                <h3 class="text-base md:text-lg font-medium mb-3 text-gray-800">✏️ Edit the Code</h3>
                 <div class="bg-white rounded-xl p-4 shadow-xl">
                     <textarea id="code-editor" class="code-editor w-full resize-none text-xs md:text-sm" rows="12"
                         spellcheck="false"><div id="alert" class="">
     <span class="text-2xl">✓</span>
     <div>
-        <p class="font-semibold">Success!</p>
+        <p class="font-medium">Success!</p>
         <p class="text-sm">Your changes have been saved successfully.</p>
     </div>
 </div></textarea>
                     <div class="mt-4 flex flex-wrap gap-2">
                         <button onclick="updatePreview()"
-                            class="px-4 py-2 bg-blue-600 text-white text-sm md:text-base font-semibold rounded-lg hover:bg-blue-700 transition-colors">
+                            class="px-4 py-2 bg-blue-600 text-white text-sm md:text-base font-medium rounded-lg hover:bg-blue-700 transition-colors">
                             Update Preview
                         </button>
                         <button onclick="resetCode()"
-                            class="px-4 py-2 bg-gray-600 text-white text-sm md:text-base font-semibold rounded-lg hover:bg-gray-700 transition-colors">
+                            class="px-4 py-2 bg-gray-600 text-white text-sm md:text-base font-medium rounded-lg hover:bg-gray-700 transition-colors">
                             Reset
                         </button>
                     </div>
@@ -71,7 +71,7 @@
 
             <!-- Live Preview -->
             <div>
-                <h3 class="text-base md:text-lg font-bold mb-3 text-gray-800">👁️ Live Preview</h3>
+                <h3 class="text-base md:text-lg font-medium mb-3 text-gray-800">👁️ Live Preview</h3>
                 <div
                     class="bg-white rounded-xl p-6 md:p-12 shadow-xl min-h-[200px] md:min-h-[300px] flex items-center justify-center">
                     <div id="preview-container"></div>
@@ -94,13 +94,13 @@
         <!-- Validation -->
         <div class="flex gap-4">
             <button onclick="checkSolution()"
-                class="px-6 py-3 md:px-8 md:py-4 bg-gradient-to-r from-green-600 to-emerald-600 hover:from-green-700 hover:to-emerald-700 text-white text-sm md:text-base font-bold rounded-xl shadow-lg transition-all transform hover:scale-105">
+                class="px-6 py-3 md:px-8 md:py-4 bg-gradient-to-r from-green-600 to-emerald-600 hover:from-green-700 hover:to-emerald-700 text-white text-sm md:text-base font-medium rounded-xl shadow-lg transition-all transform hover:scale-105">
                 ✓ Check Solution
             </button>
         </div>
 
         <!-- Feedback -->
-        <div id="feedback" class="mt-6 hidden p-4 md:p-6 rounded-xl font-semibold text-base md:text-lg"></div>
+        <div id="feedback" class="mt-6 hidden p-4 md:p-6 rounded-xl font-medium text-base md:text-lg"></div>
 
     </div>
 
@@ -108,7 +108,7 @@
         const initialCode = `<div id="alert" class="">
     <span class="text-2xl">✓</span>
     <div>
-        <p class="font-semibold">Success!</p>
+        <p class="font-medium">Success!</p>
         <p class="text-sm">Your changes have been saved successfully.</p>
     </div>
 </div>`;

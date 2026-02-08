@@ -38,7 +38,7 @@
 
         <!-- Goal -->
         <div class="bg-blue-600 text-white p-4 md:p-6 rounded-xl mb-6 md:mb-8 shadow-lg">
-            <h2 class="text-xl md:text-2xl font-bold mb-2">🎯 Goal</h2>
+            <h2 class="text-xl md:text-2xl font-medium mb-2">🎯 Goal</h2>
             <p class="text-base md:text-lg">Style the button with proper padding, colors, and hover effects</p>
         </div>
 
@@ -47,7 +47,7 @@
 
             <!-- Code Editor -->
             <div>
-                <h3 class="text-base md:text-lg font-bold mb-3 text-gray-800">✏️ Edit the Code</h3>
+                <h3 class="text-base md:text-lg font-medium mb-3 text-gray-800">✏️ Edit the Code</h3>
                 <div class="bg-white rounded-xl p-4 shadow-xl">
                     <textarea id="code-editor" class="code-editor w-full resize-none text-xs md:text-sm" rows="12"
                         spellcheck="false"><button id="primary-button" class="">
@@ -55,11 +55,11 @@
 </button></textarea>
                     <div class="mt-4 flex flex-wrap gap-2">
                         <button onclick="updatePreview()"
-                            class="px-4 py-2 bg-blue-600 text-white text-sm md:text-base font-semibold rounded-lg hover:bg-blue-700 transition-colors">
+                            class="px-4 py-2 bg-blue-600 text-white text-sm md:text-base font-medium rounded-lg hover:bg-blue-700 transition-colors">
                             Update Preview
                         </button>
                         <button onclick="resetCode()"
-                            class="px-4 py-2 bg-gray-600 text-white text-sm md:text-base font-semibold rounded-lg hover:bg-gray-700 transition-colors">
+                            class="px-4 py-2 bg-gray-600 text-white text-sm md:text-base font-medium rounded-lg hover:bg-gray-700 transition-colors">
                             Reset
                         </button>
                     </div>
@@ -68,7 +68,7 @@
 
             <!-- Live Preview -->
             <div>
-                <h3 class="text-base md:text-lg font-bold mb-3 text-gray-800">👁️ Live Preview</h3>
+                <h3 class="text-base md:text-lg font-medium mb-3 text-gray-800">👁️ Live Preview</h3>
                 <div
                     class="bg-white rounded-xl p-6 md:p-12 shadow-xl min-h-[200px] md:min-h-[300px] flex items-center justify-center">
                     <div id="preview-container"></div>
@@ -84,7 +84,7 @@
                 <code class="bg-yellow-100 px-2 py-1 rounded">px-6 py-3</code>
                 <code class="bg-yellow-100 px-2 py-1 rounded">bg-blue-600</code>
                 <code class="bg-yellow-100 px-2 py-1 rounded">text-white</code>
-                <code class="bg-yellow-100 px-2 py-1 rounded">font-semibold</code>
+                <code class="bg-yellow-100 px-2 py-1 rounded">font-medium</code>
                 <code class="bg-yellow-100 px-2 py-1 rounded">rounded-lg</code>
                 <code class="bg-yellow-100 px-2 py-1 rounded">hover:bg-blue-700</code>
                 <code class="bg-yellow-100 px-2 py-1 rounded">transition-colors</code>
@@ -94,13 +94,13 @@
         <!-- Validation -->
         <div class="flex gap-4">
             <button onclick="checkSolution()"
-                class="px-6 py-3 md:px-8 md:py-4 bg-gradient-to-r from-green-600 to-emerald-600 hover:from-green-700 hover:to-emerald-700 text-white text-sm md:text-base font-bold rounded-xl shadow-lg transition-all transform hover:scale-105">
+                class="px-6 py-3 md:px-8 md:py-4 bg-gradient-to-r from-green-600 to-emerald-600 hover:from-green-700 hover:to-emerald-700 text-white text-sm md:text-base font-medium rounded-xl shadow-lg transition-all transform hover:scale-105">
                 ✓ Check Solution
             </button>
         </div>
 
         <!-- Feedback -->
-        <div id="feedback" class="mt-6 hidden p-4 md:p-6 rounded-xl font-semibold text-base md:text-lg"></div>
+        <div id="feedback" class="mt-6 hidden p-4 md:p-6 rounded-xl font-medium text-base md:text-lg"></div>
 
     </div>
 
@@ -143,7 +143,7 @@
                 padding: classList.contains('px-6') && classList.contains('py-3'),
                 background: classList.contains('bg-blue-600'),
                 textColor: classList.contains('text-white'),
-                fontWeight: classList.contains('font-semibold') || classList.contains('font-bold'),
+                fontWeight: classList.contains('font-medium') || classList.contains('font-medium'),
                 rounded: classList.contains('rounded-lg') || classList.contains('rounded-xl'),
                 hover: classList.contains('hover:bg-blue-700'),
                 transition: classList.contains('transition-colors') || classList.contains('transition-all')
@@ -162,7 +162,7 @@
                 if (!checks.padding) missing.push('padding (px-6 py-3)');
                 if (!checks.background) missing.push('background (bg-blue-600)');
                 if (!checks.textColor) missing.push('text color (text-white)');
-                if (!checks.fontWeight) missing.push('font weight (font-semibold)');
+                if (!checks.fontWeight) missing.push('font weight (font-medium)');
                 if (!checks.rounded) missing.push('rounded corners (rounded-lg)');
                 if (!checks.hover) missing.push('hover effect (hover:bg-blue-700)');
                 if (!checks.transition) missing.push('transition (transition-colors)');

@@ -7,7 +7,28 @@
     <title>PenguinUI Arena - Master TailwindCSS & AlpineJS</title>
     <script src="https://cdn.tailwindcss.com"></script>
     <script defer src="https://cdn.jsdelivr.net/npm/alpinejs@3.x.x/dist/cdn.min.js"></script>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@100..900&display=swap" rel="stylesheet">
     <style>
+        :root {
+            font-family: 'Outfit', sans-serif;
+        }
+
+        * {
+            font-weight: 400;
+            /* Default weight */
+        }
+
+        b,
+        strong,
+        .font-bold,
+        .font-semibold,
+        .font-black,
+        .font-extrabold {
+            font-weight: 500 !important;
+        }
+
         [x-cloak] {
             display: none !important;
         }
@@ -49,7 +70,7 @@
                 <span class="text-6xl md:text-8xl">🐧</span>
             </div>
             <h1
-                class="text-4xl sm:text-5xl md:text-7xl lg:text-8xl font-black mb-4 bg-gradient-to-r from-cyan-300 via-blue-300 to-purple-300 bg-clip-text text-transparent drop-shadow-sm leading-tight">
+                class="text-4xl sm:text-5xl md:text-7xl lg:text-8xl font-medium mb-4 bg-gradient-to-r from-cyan-300 via-blue-300 to-purple-300 bg-clip-text text-transparent drop-shadow-sm leading-tight">
                 PenguinUI Arena
             </h1>
             <p class="text-lg md:text-xl text-blue-200 max-w-2xl mx-auto mb-8 px-4">
@@ -59,12 +80,12 @@
 
             <div class="flex flex-wrap justify-center gap-3 md:gap-4">
                 <div
-                    class="px-4 md:px-6 py-2 md:py-3 glass-card rounded-full text-xs md:text-sm font-bold flex items-center gap-2">
+                    class="px-4 md:px-6 py-2 md:py-3 glass-card rounded-full text-xs md:text-sm font-medium flex items-center gap-2">
                     <span class="w-2 h-2 bg-green-400 rounded-full animate-pulse"></span>
                     Online Editor Mode
                 </div>
                 <button @click="resetProgress()"
-                    class="px-4 md:px-6 py-2 md:py-3 bg-red-500/20 hover:bg-red-500/40 border border-red-500/50 rounded-full text-xs md:text-sm font-bold transition-all">
+                    class="px-4 md:px-6 py-2 md:py-3 bg-red-500/20 hover:bg-red-500/40 border border-red-500/50 rounded-full text-xs md:text-sm font-medium transition-all">
                     Reset Progress
                 </button>
             </div>
@@ -75,11 +96,11 @@
             <div class="glass-card rounded-2xl md:rounded-3xl p-6 md:p-8 border border-white/20">
                 <div class="flex flex-wrap items-center justify-between mb-4 gap-4">
                     <div>
-                        <span class="text-xl md:text-2xl font-black block">Arena Progress</span>
+                        <span class="text-xl md:text-2xl font-medium block">Arena Progress</span>
                         <span class="text-sm md:text-base text-blue-200"
                             x-text="`${completedChallenges}/${totalChallenges} Challenges Completed`"></span>
                     </div>
-                    <div class="text-3xl md:text-5xl font-black text-cyan-400"
+                    <div class="text-3xl md:text-5xl font-medium text-cyan-400"
                         x-text="`${progressPercentage}%` text-cyan-400">
                     </div>
                 </div>
