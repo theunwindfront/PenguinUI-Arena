@@ -41,47 +41,49 @@
 <body
     class="bg-gradient-to-br from-slate-900 via-blue-900 to-indigo-900 min-h-screen text-white selection:bg-cyan-500/30">
 
-    <div x-data="arena()" x-cloak class="container mx-auto px-4 py-12">
+    <div x-data="arena()" x-cloak class="container mx-auto px-4 py-8 md:py-12">
 
         <!-- Header -->
-        <header class="text-center mb-16 relative">
-            <div class="mb-6 float">
-                <span class="text-8xl">🐧</span>
+        <header class="text-center mb-10 md:mb-16 relative">
+            <div class="mb-4 md:mb-6 float">
+                <span class="text-6xl md:text-8xl">🐧</span>
             </div>
             <h1
-                class="text-6xl md:text-8xl font-black mb-4 bg-gradient-to-r from-cyan-300 via-blue-300 to-purple-300 bg-clip-text text-transparent drop-shadow-sm">
+                class="text-4xl sm:text-5xl md:text-7xl lg:text-8xl font-black mb-4 bg-gradient-to-r from-cyan-300 via-blue-300 to-purple-300 bg-clip-text text-transparent drop-shadow-sm leading-tight">
                 PenguinUI Arena
             </h1>
-            <p class="text-xl text-blue-200 max-w-2xl mx-auto mb-8">
+            <p class="text-lg md:text-xl text-blue-200 max-w-2xl mx-auto mb-8 px-4">
                 The ultimate browser-based playground to master TailwindCSS and AlpineJS.
                 Fix broken code, learn interactive patterns, and unlock new zones.
             </p>
 
-            <div class="flex flex-wrap justify-center gap-4">
-                <div class="px-6 py-3 glass-card rounded-full text-sm font-bold flex items-center gap-2">
+            <div class="flex flex-wrap justify-center gap-3 md:gap-4">
+                <div
+                    class="px-4 md:px-6 py-2 md:py-3 glass-card rounded-full text-xs md:text-sm font-bold flex items-center gap-2">
                     <span class="w-2 h-2 bg-green-400 rounded-full animate-pulse"></span>
-                    Online Editor Mode Enabled
+                    Online Editor Mode
                 </div>
                 <button @click="resetProgress()"
-                    class="px-6 py-3 bg-red-500/20 hover:bg-red-500/40 border border-red-500/50 rounded-full text-sm font-bold transition-all">
+                    class="px-4 md:px-6 py-2 md:py-3 bg-red-500/20 hover:bg-red-500/40 border border-red-500/50 rounded-full text-xs md:text-sm font-bold transition-all">
                     Reset Progress
                 </button>
             </div>
         </header>
 
         <!-- Progress Overview -->
-        <div class="max-w-5xl mx-auto mb-16">
-            <div class="glass-card rounded-3xl p-8 border border-white/20">
+        <div class="max-w-5xl mx-auto mb-10 md:mb-16">
+            <div class="glass-card rounded-2xl md:rounded-3xl p-6 md:p-8 border border-white/20">
                 <div class="flex flex-wrap items-center justify-between mb-4 gap-4">
                     <div>
-                        <span class="text-2xl font-black block">Arena Progress</span>
-                        <span class="text-blue-200"
+                        <span class="text-xl md:text-2xl font-black block">Arena Progress</span>
+                        <span class="text-sm md:text-base text-blue-200"
                             x-text="`${completedChallenges}/${totalChallenges} Challenges Completed`"></span>
                     </div>
-                    <div class="text-5xl font-black text-cyan-400" x-text="`${progressPercentage}%` text-cyan-400">
+                    <div class="text-3xl md:text-5xl font-black text-cyan-400"
+                        x-text="`${progressPercentage}%` text-cyan-400">
                     </div>
                 </div>
-                <div class="w-full bg-white/10 rounded-full h-6 p-1 overflow-hidden border border-white/10">
+                <div class="w-full bg-white/10 rounded-full h-4 md:h-6 p-1 overflow-hidden border border-white/10">
                     <div class="bg-gradient-to-r from-cyan-400 via-blue-500 to-purple-600 h-full rounded-full transition-all duration-1000 shadow-[0_0_20px_rgba(34,211,238,0.5)]"
                         :style="`width: ${progressPercentage}%` transition-all duration-1000 shadow-[0_0_20px_rgba(34,211,238,0.5)]">
                     </div>
@@ -90,10 +92,11 @@
         </div>
 
         <!-- Zone Map -->
-        <div class="max-w-6xl mx-auto space-y-12">
+        <div class="max-w-6xl mx-auto space-y-8 md:space-y-12">
 
             <template x-for="zone in zones" :key="zone.id">
-                <div class="glass-card rounded-[3rem] p-10 border border-white/20 relative overflow-hidden group">
+                <div
+                    class="glass-card rounded-3xl md:rounded-[3rem] p-6 md:p-10 border border-white/20 relative overflow-hidden group">
 
                     <!-- Decorative Background Gradient -->
                     <div
@@ -101,68 +104,73 @@
                     </div>
 
                     <!-- Zone Header -->
-                    <div class="flex flex-wrap items-center justify-between mb-10 gap-6 relative z-10">
-                        <div class="flex items-center gap-6">
-                            <div class="w-24 h-24 rounded-[2rem] flex items-center justify-center text-5xl shadow-2xl"
+                    <div class="flex flex-wrap items-center justify-between mb-8 md:mb-10 gap-6 relative z-10">
+                        <div class="flex items-center gap-4 md:gap-6">
+                            <div class="w-16 h-16 md:w-24 md:h-24 rounded-2xl md:rounded-[2rem] flex items-center justify-center text-3xl md:text-5xl shadow-2xl shrink-0"
                                 :class="zone.unlocked ? 'bg-gradient-to-br from-cyan-400 to-blue-600' : 'bg-slate-800 text-slate-500'">
                                 <span x-text="zone.icon"></span>
                             </div>
                             <div>
-                                <h2 class="text-4xl font-black mb-2" x-text="zone.name"></h2>
-                                <p class="text-xl text-blue-200" x-text="zone.description"></p>
+                                <h2 class="text-2xl md:text-4xl font-black mb-1 md:mb-2" x-text="zone.name"></h2>
+                                <p class="text-base md:text-xl text-blue-200" x-text="zone.description"></p>
                             </div>
                         </div>
-                        <div class="text-right px-6 py-3 bg-white/10 rounded-2xl border border-white/10">
-                            <div class="text-xs uppercase tracking-widest text-blue-300 font-bold mb-1">Zone Status
+                        <div
+                            class="px-4 py-2 md:px-6 md:py-3 bg-white/10 rounded-xl md:rounded-2xl border border-white/10">
+                            <div class="text-[10px] md:text-xs uppercase tracking-widest text-blue-300 font-bold mb-1">
+                                Zone Status
                             </div>
-                            <div class="text-2xl font-black" x-text="`${zone.completed} / ${zone.total}`"></div>
+                            <div class="text-lg md:text-2xl font-black" x-text="`${zone.completed} / ${zone.total}`">
+                            </div>
                         </div>
                     </div>
 
                     <!-- Zone Lock Overlay -->
                     <div x-show="!zone.unlocked"
-                        class="text-center py-20 relative z-10 bg-slate-900/40 rounded-[2rem] border border-white/5 backdrop-blur-md">
-                        <div class="text-8xl mb-6">🔒</div>
-                        <h3 class="text-3xl font-black mb-2">Area Locked</h3>
-                        <p class="text-xl text-blue-300">Complete the previous zone to enter this area.</p>
+                        class="text-center py-12 md:py-20 relative z-10 bg-slate-900/40 rounded-2xl md:rounded-[2rem] border border-white/5 backdrop-blur-md px-6">
+                        <div class="text-6xl md:text-8xl mb-4 md:mb-6">🔒</div>
+                        <h3 class="text-2xl md:text-3xl font-black mb-2">Area Locked</h3>
+                        <p class="text-lg md:text-xl text-blue-300">Complete the previous zone to enter this area.</p>
                     </div>
 
                     <!-- Challenge Grid -->
                     <div x-show="zone.unlocked">
-                        <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 relative z-10">
+                        <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4 md:gap-6 relative z-10">
                             <template
                                 x-for="challenge in (zone.visibleLimit ? zone.challenges.slice(0, zone.visibleLimit) : zone.challenges)"
                                 :key="challenge.id">
                                 <div @click="!challenge.locked && openChallenge(challenge)"
-                                    class="relative bg-white/5 rounded-3xl p-8 border border-white/10 transition-all duration-500 group/item overflow-hidden"
+                                    class="relative bg-white/5 rounded-2xl md:rounded-3xl p-6 md:p-8 border border-white/10 transition-all duration-500 group/item overflow-hidden"
                                     :class="challenge.completed ? 'ring-2 ring-green-400/50 bg-green-500/5' : (challenge.locked ? 'opacity-40 grayscale pointer-events-none' : 'hover:bg-white/10 hover:translate-y-[-8px] hover:shadow-2xl cursor-pointer hover:border-cyan-500/50')">
 
                                     <!-- Completion Badge -->
                                     <div x-show="challenge.completed"
-                                        class="absolute top-6 right-6 w-10 h-10 bg-green-500 rounded-full flex items-center justify-center text-white shadow-lg shadow-green-500/30">
-                                        <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                        class="absolute top-4 right-4 md:top-6 md:right-6 w-8 h-8 md:w-10 md:h-10 bg-green-500 rounded-full flex items-center justify-center text-white shadow-lg shadow-green-500/30">
+                                        <svg class="w-5 h-5 md:w-6 md:h-6" fill="none" stroke="currentColor"
+                                            viewBox="0 0 24 24">
                                             <path stroke-linecap="round" stroke-linejoin="round" stroke-width="3"
                                                 d="M5 13l4 4L19 7"></path>
                                         </svg>
                                     </div>
 
                                     <!-- Challenge Info -->
-                                    <h3 class="text-2xl font-black mb-3 group-hover/item:text-cyan-400 transition-colors"
+                                    <h3 class="text-xl md:text-2xl font-black mb-2 md:mb-3 group-hover/item:text-cyan-400 transition-colors"
                                         x-text="challenge.name"></h3>
-                                    <p class="text-blue-200 mb-6 line-clamp-2" x-text="challenge.goal"></p>
+                                    <p class="text-sm md:text-base text-blue-200 mb-4 md:mb-6 line-clamp-2"
+                                        x-text="challenge.goal"></p>
 
                                     <!-- Tags -->
                                     <div class="flex flex-wrap gap-2">
                                         <template x-for="tag in challenge.tags" :key="tag">
                                             <span
-                                                class="px-3 py-1 bg-cyan-500/20 text-cyan-300 rounded-lg text-xs font-bold border border-cyan-500/30"
+                                                class="px-2 py-0.5 md:px-3 md:py-1 bg-cyan-500/20 text-cyan-300 rounded-lg text-[10px] md:text-xs font-bold border border-cyan-500/30"
                                                 x-text="tag"></span>
                                         </template>
                                     </div>
 
                                     <!-- Hover Action Hint -->
                                     <div
-                                        class="mt-6 flex items-center text-sm font-bold text-cyan-400 opacity-0 group-hover/item:opacity-100 transition-all transform translate-y-2 group-hover/item:translate-y-0">
+                                        class="mt-4 md:mt-6 flex items-center text-xs md:text-sm font-bold text-cyan-400 opacity-0 group-hover/item:opacity-100 transition-all transform translate-y-2 group-hover/item:translate-y-0">
                                         <span>Enter Challenge</span>
                                         <svg class="w-4 h-4 ml-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                                             <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
@@ -175,10 +183,10 @@
 
                         <!-- Load More Button -->
                         <div x-show="zone.visibleLimit && zone.visibleLimit < zone.challenges.length"
-                            class="mt-12 text-center">
+                            class="mt-8 md:mt-12 text-center">
                             <button @click="loadMore(zone)"
-                                class="px-10 py-4 bg-gradient-to-r from-cyan-500 to-blue-600 rounded-3xl font-black text-xl hover:scale-105 transition-transform shadow-2xl shadow-cyan-500/20">
-                                ➕ Load More Challenges
+                                class="px-8 py-3 md:px-10 md:py-4 bg-gradient-to-r from-cyan-500 to-blue-600 rounded-2xl md:rounded-3xl font-black text-lg md:text-xl hover:scale-105 transition-transform shadow-2xl shadow-cyan-500/20">
+                                ➕ Load More
                             </button>
                         </div>
                     </div>
@@ -189,9 +197,9 @@
         </div>
 
         <!-- Footer -->
-        <footer class="mt-24 text-center text-blue-300/60 text-sm space-y-4 pb-12">
+        <footer class="mt-16 md:mt-24 text-center text-blue-300/60 text-xs md:text-sm space-y-4 pb-12 px-4">
             <div
-                class="glass-card max-w-sm mx-auto p-6 rounded-3xl border border-white/10 group hover:border-amber-500/50 transition-all duration-500">
+                class="glass-card max-w-sm mx-auto p-6 rounded-2xl md:rounded-3xl border border-white/10 group hover:border-amber-500/50 transition-all duration-500">
                 <p class="text-amber-300 font-bold mb-3 flex items-center justify-center gap-2">
                     ☕ Support the Project
                 </p>
@@ -202,46 +210,49 @@
                     class="bg-white/5 p-3 rounded-2xl border border-white/5 group-hover:bg-amber-500/10 transition-colors">
                     <span class="text-[10px] uppercase tracking-widest block mb-1 opacity-50">Sponsor via Google
                         Pay</span>
-                    <span class="text-lg font-black text-white tracking-widest select-all">9375948109</span>
+                    <span
+                        class="text-base md:text-lg font-black text-white tracking-widest select-all">9375948109</span>
                 </div>
             </div>
 
             <div class="pt-8">
                 <p class="font-bold">© 2026 PenguinUI Arena. All Rights Reserved.</p>
-                <p class="text-xs mt-1">Built with ❤️ for developers who master, not memorize. 🐧</p>
+                <p class="text-[10px] md:text-xs mt-1">Built with ❤️ for developers who master, not memorize. 🐧</p>
             </div>
         </footer>
 
         <!-- Challenge Modal -->
         <div x-show="currentChallenge !== null"
-            class="fixed inset-0 bg-slate-950/95 backdrop-blur-xl flex items-center justify-center p-4 z-50 overflow-hidden"
+            class="fixed inset-0 bg-slate-950/95 backdrop-blur-xl flex items-center justify-center p-2 md:p-4 z-50 overflow-hidden"
             x-transition:enter="transition ease-out duration-300" x-transition:enter-start="opacity-0 scale-95"
             x-transition:enter-end="opacity-100 scale-100" @click.self="closeChallenge()">
 
             <div
-                class="bg-slate-900 rounded-[3rem] w-full max-w-[90vw] h-[90vh] flex flex-col border-2 border-white/10 shadow-[0_0_50px_rgba(0,0,0,0.5)] relative">
+                class="bg-slate-900 rounded-2xl md:rounded-[3rem] w-full max-w-[95vw] md:max-w-[90vw] h-[95vh] md:h-[90vh] flex flex-col border-2 border-white/10 shadow-[0_0_50px_rgba(0,0,0,0.5)] relative">
 
                 <!-- Modal Header -->
-                <div class="px-10 py-6 border-b border-white/10 flex items-center justify-between shrink-0">
-                    <div class="flex items-center gap-6">
+                <div
+                    class="px-4 py-4 md:px-10 md:py-6 border-b border-white/10 flex items-center justify-between shrink-0">
+                    <div class="flex items-center gap-3 md:gap-6">
                         <div
-                            class="w-12 h-12 rounded-xl bg-gradient-to-br from-cyan-400 to-blue-600 flex items-center justify-center text-2xl">
+                            class="w-10 h-10 md:w-12 md:h-12 rounded-lg md:rounded-xl bg-gradient-to-br from-cyan-400 to-blue-600 flex items-center justify-center text-xl md:text-2xl shrink-0">
                             🐧</div>
-                        <div>
-                            <h2 class="text-3xl font-black" x-text="currentChallenge?.name"></h2>
-                            <p class="text-blue-300 text-sm" x-text="currentChallenge?.goal"></p>
+                        <div class="min-w-0">
+                            <h2 class="text-xl md:text-3xl font-black truncate" x-text="currentChallenge?.name"></h2>
+                            <p class="text-blue-300 text-[10px] md:text-sm truncate" x-text="currentChallenge?.goal">
+                            </p>
                         </div>
                     </div>
                     <button @click="closeChallenge()"
-                        class="w-14 h-14 rounded-2xl bg-white/5 hover:bg-white/10 border border-white/10 flex items-center justify-center text-3xl transition-all hover:rotate-90">
+                        class="w-10 h-10 md:w-14 md:h-14 rounded-lg md:rounded-2xl bg-white/5 hover:bg-white/10 border border-white/10 flex items-center justify-center text-2xl md:text-3xl transition-all hover:rotate-90 shrink-0">
                         ×
                     </button>
                 </div>
 
                 <!-- Modal Content -->
-                <div class="flex-grow relative overflow-hidden">
+                <div class="flex-grow relative overflow-hidden bg-slate-100">
                     <iframe x-show="currentChallenge !== null" :src="currentChallenge?.file"
-                        class="absolute inset-0 w-full h-full border-0 bg-slate-50"></iframe>
+                        class="absolute inset-0 w-full h-full border-0"></iframe>
                 </div>
 
             </div>

@@ -22,23 +22,26 @@
     </style>
 </head>
 
-<body class="bg-slate-50 p-8">
+<body class="bg-slate-50 p-4 md:p-8">
     <div class="max-w-6xl mx-auto">
-        <div class="bg-blue-600 text-white p-6 rounded-xl mb-8">
-            <h2 class="text-2xl font-bold mb-2">Lab #1: Fast Flex</h2>
-            <p>Center these three items horizontally with space between them using Flexbox.</p>
+        <div class="bg-blue-600 text-white p-4 md:p-6 rounded-xl mb-6 md:mb-8">
+            <h2 class="text-xl md:text-2xl font-bold mb-2">Lab #1: Fast Flex</h2>
+            <p class="text-sm md:text-base">Center these three items horizontally with space between them using Flexbox.
+            </p>
         </div>
-        <div class="grid grid-cols-1 lg:grid-cols-2 gap-6 mb-6">
-            <textarea id="code-editor" class="code-editor w-full" rows="10"><div id="target" class="">
+        <div class="grid grid-cols-1 lg:grid-cols-2 gap-4 md:gap-6 mb-6">
+            <textarea id="code-editor" class="code-editor w-full text-xs md:text-sm" rows="10"><div id="target" class="">
     <div class="w-12 h-12 bg-red-500 rounded-full"></div>
     <div class="w-12 h-12 bg-green-500 rounded-full"></div>
     <div class="w-12 h-12 bg-blue-500 rounded-full"></div>
 </div></textarea>
-            <div id="preview-container" class="bg-white p-12 rounded-xl shadow-xl border"></div>
+            <div id="preview-container"
+                class="bg-white p-6 md:p-12 rounded-xl shadow-xl border min-h-[150px] md:min-h-0"></div>
         </div>
-        <button onclick="checkSolution()" class="px-8 py-4 bg-green-600 text-white font-bold rounded-xl">Check
+        <button onclick="checkSolution()"
+            class="px-6 py-3 md:px-8 md:py-4 bg-green-600 text-white text-sm md:text-base font-bold rounded-xl shadow-lg transition-all active:scale-95">Check
             Solution</button>
-        <div id="feedback" class="mt-6 hidden p-6 rounded-xl font-semibold text-lg"></div>
+        <div id="feedback" class="mt-6 hidden p-4 md:p-6 rounded-xl font-semibold text-base md:text-lg"></div>
     </div>
     <script>
         function updatePreview() {
