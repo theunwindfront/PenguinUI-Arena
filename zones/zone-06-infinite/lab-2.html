@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Lab #2: Padding Precision</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <style>
+        [x-cloak] {
+            display: none !important;
+        }
+
+        .code-editor {
+            font-family: 'Courier New', monospace;
+            font-size: 14px;
+            background: #1e293b;
+            color: #e2e8f0;
+            padding: 16px;
+            border-radius: 8px;
+        }
+    </style>
+</head>
+
+<body class="bg-slate-50 p-8">
+    <div class="max-w-6xl mx-auto">
+        <div class="bg-blue-600 text-white p-6 rounded-xl mb-8">
+            <h2 class="text-2xl font-bold mb-2">Lab #2: Padding Precision</h2>
+            <p>Make this button larger. Add 2rem of horizontal padding and 1rem of vertical padding.</p>
+        </div>
+        <div class="grid grid-cols-1 lg:grid-cols-2 gap-6 mb-6">
+            <textarea id="code-editor" class="code-editor w-full" rows="10"><button id="target" class="bg-blue-500 text-white rounded-lg">
+    Click Me
+</button></textarea>
+            <div id="preview-container"
+                class="bg-white p-12 rounded-xl shadow-xl border flex items-center justify-center"></div>
+        </div>
+        <button onclick="checkSolution()" class="px-8 py-4 bg-green-600 text-white font-bold rounded-xl">Check
+            Solution</button>
+        <div id="feedback" class="mt-6 hidden p-6 rounded-xl font-semibold text-lg"></div>
+    </div>
+    <script>
+        function updatePreview() {
+            document.getElementById('preview-container').innerHTML = document.getElementById('code-editor').value;
+        }
+        window.addEventListener('input', updatePreview);
+        window.addEventListener('DOMContentLoaded', updatePreview);
+        function checkSolution() {
+            updatePreview();
+            const el = document.getElementById('target');
+            if (el && el.classList.contains('px-8') && el.classList.contains('py-4')) {
+                ArenaValidation.showSuccess('Perfect padding!', 'zone-06', 'lab-2');
+            } else {
+                ArenaValidation.showFailure('Missing px-8 or py-4');
+            }
+        }
+    </script>
+    <script src="../../engine.js"></script>
+</body>
+
+</html>

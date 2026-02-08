@@ -1,0 +1,176 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Card Challenge</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <style>
+        [x-cloak] {
+            display: none !important;
+        }
+
+        .code-editor {
+            font-family: 'Courier New', monospace;
+            font-size: 14px;
+            line-height: 1.5;
+            background: #1e293b;
+            color: #e2e8f0;
+            padding: 16px;
+            border-radius: 8px;
+            overflow-x: auto;
+            white-space: pre;
+            tab-size: 4;
+        }
+
+        .code-editor:focus {
+            outline: 2px solid #3b82f6;
+            outline-offset: 2px;
+        }
+    </style>
+</head>
+
+<body class="bg-gradient-to-br from-slate-50 to-purple-50 min-h-screen p-8">
+
+    <div class="max-w-6xl mx-auto">
+
+        <!-- Goal -->
+        <div class="bg-blue-600 text-white p-6 rounded-xl mb-8 shadow-lg">
+            <h2 class="text-2xl font-bold mb-2">🎯 Goal</h2>
+            <p class="text-lg">Build a card with padding, shadow, rounded corners, and proper spacing</p>
+        </div>
+
+        <!-- Split View -->
+        <div class="grid grid-cols-1 lg:grid-cols-2 gap-6 mb-6">
+
+            <!-- Code Editor -->
+            <div>
+                <h3 class="text-lg font-bold mb-3 text-gray-800">✏️ Edit the Code</h3>
+                <div class="bg-white rounded-xl p-4 shadow-xl">
+                    <textarea id="code-editor" class="code-editor w-full resize-none" rows="16" spellcheck="false"><div id="card" class="">
+    <h3 class="text-2xl font-bold text-gray-900 mb-2">Card Title</h3>
+    <p class="text-gray-600 mb-4">This is a card component with some descriptive text inside it.</p>
+    <button class="px-4 py-2 bg-purple-600 text-white rounded-lg hover:bg-purple-700 transition-colors">
+        Action
+    </button>
+</div></textarea>
+                    <div class="mt-4 flex gap-2">
+                        <button onclick="updatePreview()"
+                            class="px-4 py-2 bg-blue-600 text-white font-semibold rounded-lg hover:bg-blue-700 transition-colors">
+                            Update Preview
+                        </button>
+                        <button onclick="resetCode()"
+                            class="px-4 py-2 bg-gray-600 text-white font-semibold rounded-lg hover:bg-gray-700 transition-colors">
+                            Reset
+                        </button>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Live Preview -->
+            <div>
+                <h3 class="text-lg font-bold mb-3 text-gray-800">👁️ Live Preview</h3>
+                <div
+                    class="bg-gradient-to-br from-purple-50 to-pink-50 rounded-xl p-12 shadow-xl min-h-[400px] flex items-center justify-center">
+                    <div id="preview-container"></div>
+                </div>
+            </div>
+
+        </div>
+
+        <!-- Hint -->
+        <div class="mb-6 bg-yellow-50 border-l-4 border-yellow-400 p-4 rounded">
+            <p class="text-yellow-800">
+                <strong>💡 Hint:</strong> Add
+                <code class="bg-yellow-100 px-2 py-1 rounded">bg-white</code>
+                <code class="bg-yellow-100 px-2 py-1 rounded">p-6</code>
+                <code class="bg-yellow-100 px-2 py-1 rounded">rounded-xl</code>
+                <code class="bg-yellow-100 px-2 py-1 rounded">shadow-lg</code>
+                <code class="bg-yellow-100 px-2 py-1 rounded">max-w-sm</code>
+            </p>
+        </div>
+
+        <!-- Validation -->
+        <div class="flex gap-4">
+            <button onclick="checkSolution()"
+                class="px-8 py-4 bg-gradient-to-r from-green-600 to-emerald-600 hover:from-green-700 hover:to-emerald-700 text-white font-bold rounded-xl shadow-lg transition-all transform hover:scale-105">
+                ✓ Check Solution
+            </button>
+        </div>
+
+        <!-- Feedback -->
+        <div id="feedback" class="mt-6 hidden p-6 rounded-xl font-semibold text-lg"></div>
+
+    </div>
+
+    <script>
+        const initialCode = `<div id="card" class="">
+    <h3 class="text-2xl font-bold text-gray-900 mb-2">Card Title</h3>
+    <p class="text-gray-600 mb-4">This is a card component with some descriptive text inside it.</p>
+    <button class="px-4 py-2 bg-purple-600 text-white rounded-lg hover:bg-purple-700 transition-colors">
+        Action
+    </button>
+</div>`;
+
+        window.addEventListener('DOMContentLoaded', () => {
+            updatePreview();
+        });
+
+        function updatePreview() {
+            const code = document.getElementById('code-editor').value;
+            const preview = document.getElementById('preview-container');
+            preview.innerHTML = code;
+        }
+
+        function resetCode() {
+            document.getElementById('code-editor').value = initialCode;
+            updatePreview();
+            document.getElementById('feedback').classList.add('hidden');
+        }
+
+        function checkSolution() {
+            updatePreview();
+
+            const card = document.getElementById('card');
+
+            if (!card) {
+                ArenaValidation.showFailure('Card element not found! Make sure it has id="card"');
+                return;
+            }
+
+            const classList = card.classList;
+
+            const checks = {
+                background: classList.contains('bg-white'),
+                padding: classList.contains('p-6') || classList.contains('p-8'),
+                rounded: classList.contains('rounded-xl') || classList.contains('rounded-2xl'),
+                shadow: classList.contains('shadow-lg') || classList.contains('shadow-xl'),
+                maxWidth: classList.contains('max-w-sm') || classList.contains('max-w-md')
+            };
+
+            const allPassed = Object.values(checks).every(v => v);
+
+            if (allPassed) {
+                ArenaValidation.showSuccess(
+                    'Excellent! Your card looks perfect!',
+                    'zone-01',
+                    'card'
+                );
+            } else {
+                const missing = [];
+                if (!checks.background) missing.push('background (bg-white)');
+                if (!checks.padding) missing.push('padding (p-6)');
+                if (!checks.rounded) missing.push('rounded corners (rounded-xl)');
+                if (!checks.shadow) missing.push('shadow (shadow-lg)');
+                if (!checks.maxWidth) missing.push('max width (max-w-sm)');
+
+                ArenaValidation.showFailure('Missing: ' + missing.join(', '));
+            }
+        }
+    </script>
+    <script src="../../engine.js"></script>
+
+</body>
+
+</html>

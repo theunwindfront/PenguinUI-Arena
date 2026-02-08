@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Lab #1: Fast Flex</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <style>
+        [x-cloak] {
+            display: none !important;
+        }
+
+        .code-editor {
+            font-family: 'Courier New', monospace;
+            font-size: 14px;
+            background: #1e293b;
+            color: #e2e8f0;
+            padding: 16px;
+            border-radius: 8px;
+        }
+    </style>
+</head>
+
+<body class="bg-slate-50 p-8">
+    <div class="max-w-6xl mx-auto">
+        <div class="bg-blue-600 text-white p-6 rounded-xl mb-8">
+            <h2 class="text-2xl font-bold mb-2">Lab #1: Fast Flex</h2>
+            <p>Center these three items horizontally with space between them using Flexbox.</p>
+        </div>
+        <div class="grid grid-cols-1 lg:grid-cols-2 gap-6 mb-6">
+            <textarea id="code-editor" class="code-editor w-full" rows="10"><div id="target" class="">
+    <div class="w-12 h-12 bg-red-500 rounded-full"></div>
+    <div class="w-12 h-12 bg-green-500 rounded-full"></div>
+    <div class="w-12 h-12 bg-blue-500 rounded-full"></div>
+</div></textarea>
+            <div id="preview-container" class="bg-white p-12 rounded-xl shadow-xl border"></div>
+        </div>
+        <button onclick="checkSolution()" class="px-8 py-4 bg-green-600 text-white font-bold rounded-xl">Check
+            Solution</button>
+        <div id="feedback" class="mt-6 hidden p-6 rounded-xl font-semibold text-lg"></div>
+    </div>
+    <script>
+        function updatePreview() {
+            document.getElementById('preview-container').innerHTML = document.getElementById('code-editor').value;
+        }
+        window.addEventListener('input', updatePreview);
+        window.addEventListener('DOMContentLoaded', updatePreview);
+        function checkSolution() {
+            updatePreview();
+            const el = document.getElementById('target');
+            if (el && el.classList.contains('flex') && el.classList.contains('justify-between')) {
+                ArenaValidation.showSuccess('Quick and efficient!', 'zone-06', 'lab-1');
+            } else {
+                ArenaValidation.showFailure('Missing flex or justify-between');
+            }
+        }
+    </script>
+    <script src="../../engine.js"></script>
+</body>
+
+</html>

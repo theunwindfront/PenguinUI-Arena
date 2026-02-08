@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Lab #3: Alpine Toggle</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script defer src="https://cdn.jsdelivr.net/npm/alpinejs@3.x.x/dist/cdn.min.js"></script>
+    <style>
+        [x-cloak] {
+            display: none !important;
+        }
+
+        .code-editor {
+            font-family: 'Courier New', monospace;
+            font-size: 14px;
+            background: #1e293b;
+            color: #e2e8f0;
+            padding: 16px;
+            border-radius: 8px;
+        }
+    </style>
+</head>
+
+<body class="bg-slate-50 p-8">
+    <div class="max-w-6xl mx-auto">
+        <div class="bg-blue-600 text-white p-6 rounded-xl mb-8">
+            <h2 class="text-2xl font-bold mb-2">Lab #3: Alpine Toggle</h2>
+            <p>Make the "Hidden Message" visible only when the button is clicked using Alpine.js.</p>
+        </div>
+        <div class="grid grid-cols-1 lg:grid-cols-2 gap-6 mb-6">
+            <textarea id="code-editor" class="code-editor w-full" rows="15"><div id="target" x-data="{ open: false }">
+    <button id="btn" class="bg-indigo-600 text-white px-4 py-2 rounded">Toggle</button>
+    <div id="msg" class="mt-4 p-4 bg-yellow-100 border border-yellow-300 rounded">
+        Surprise! 🎉
+    </div>
+</div></textarea>
+            <div id="preview-container" class="bg-white p-12 rounded-xl shadow-xl border"></div>
+        </div>
+        <button onclick="checkSolution()" class="px-8 py-4 bg-green-600 text-white font-bold rounded-xl">Check
+            Solution</button>
+        <div id="feedback" class="mt-6 hidden p-6 rounded-xl font-semibold text-lg"></div>
+    </div>
+    <script>
+        function updatePreview() {
+            const preview = document.getElementById('preview-container');
+            preview.innerHTML = document.getElementById('code-editor').value;
+            if (window.Alpine) Alpine.initTree(preview);
+        }
+        window.addEventListener('input', updatePreview);
+        window.addEventListener('DOMContentLoaded', updatePreview);
+        function checkSolution() {
+            updatePreview();
+            const btn = document.getElementById('btn');
+            const msg = document.getElementById('msg');
+            if (btn && msg && btn.hasAttribute('@click') && msg.hasAttribute('x-show')) {
+                ArenaValidation.showSuccess('A classic Alpine pattern!', 'zone-06', 'lab-3');
+            } else {
+                ArenaValidation.showFailure('Missing @click or x-show');
+            }
+        }
+    </script>
+    <script src="../../engine.js"></script>
+</body>
+
+</html>

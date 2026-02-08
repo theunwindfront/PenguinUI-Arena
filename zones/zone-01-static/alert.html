@@ -1,0 +1,180 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Alert Challenge</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <style>
+        [x-cloak] {
+            display: none !important;
+        }
+
+        .code-editor {
+            font-family: 'Courier New', monospace;
+            font-size: 14px;
+            line-height: 1.5;
+            background: #1e293b;
+            color: #e2e8f0;
+            padding: 16px;
+            border-radius: 8px;
+            overflow-x: auto;
+            white-space: pre;
+            tab-size: 4;
+        }
+
+        .code-editor:focus {
+            outline: 2px solid #3b82f6;
+            outline-offset: 2px;
+        }
+    </style>
+</head>
+
+<body class="bg-gradient-to-br from-slate-50 to-green-50 min-h-screen p-8">
+
+    <div class="max-w-6xl mx-auto">
+
+        <!-- Goal -->
+        <div class="bg-blue-600 text-white p-6 rounded-xl mb-8 shadow-lg">
+            <h2 class="text-2xl font-bold mb-2">🎯 Goal</h2>
+            <p class="text-lg">Create a success alert with flexbox layout, colors, and proper spacing</p>
+        </div>
+
+        <!-- Split View -->
+        <div class="grid grid-cols-1 lg:grid-cols-2 gap-6 mb-6">
+
+            <!-- Code Editor -->
+            <div>
+                <h3 class="text-lg font-bold mb-3 text-gray-800">✏️ Edit the Code</h3>
+                <div class="bg-white rounded-xl p-4 shadow-xl">
+                    <textarea id="code-editor" class="code-editor w-full resize-none" rows="12" spellcheck="false"><div id="alert" class="">
+    <span class="text-2xl">✓</span>
+    <div>
+        <p class="font-semibold">Success!</p>
+        <p class="text-sm">Your changes have been saved successfully.</p>
+    </div>
+</div></textarea>
+                    <div class="mt-4 flex gap-2">
+                        <button onclick="updatePreview()"
+                            class="px-4 py-2 bg-blue-600 text-white font-semibold rounded-lg hover:bg-blue-700 transition-colors">
+                            Update Preview
+                        </button>
+                        <button onclick="resetCode()"
+                            class="px-4 py-2 bg-gray-600 text-white font-semibold rounded-lg hover:bg-gray-700 transition-colors">
+                            Reset
+                        </button>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Live Preview -->
+            <div>
+                <h3 class="text-lg font-bold mb-3 text-gray-800">👁️ Live Preview</h3>
+                <div class="bg-white rounded-xl p-12 shadow-xl min-h-[300px] flex items-center justify-center">
+                    <div id="preview-container"></div>
+                </div>
+            </div>
+
+        </div>
+
+        <!-- Hint -->
+        <div class="mb-6 bg-yellow-50 border-l-4 border-yellow-400 p-4 rounded">
+            <p class="text-yellow-800">
+                <strong>💡 Hint:</strong> Use flexbox (<code
+                    class="bg-yellow-100 px-2 py-1 rounded">flex items-center gap-3</code>),
+                green colors (<code
+                    class="bg-yellow-100 px-2 py-1 rounded">bg-green-100 border-green-400 text-green-800</code>),
+                padding (<code class="bg-yellow-100 px-2 py-1 rounded">p-4</code>), border, and rounded corners
+            </p>
+        </div>
+
+        <!-- Validation -->
+        <div class="flex gap-4">
+            <button onclick="checkSolution()"
+                class="px-8 py-4 bg-gradient-to-r from-green-600 to-emerald-600 hover:from-green-700 hover:to-emerald-700 text-white font-bold rounded-xl shadow-lg transition-all transform hover:scale-105">
+                ✓ Check Solution
+            </button>
+        </div>
+
+        <!-- Feedback -->
+        <div id="feedback" class="mt-6 hidden p-6 rounded-xl font-semibold text-lg"></div>
+
+    </div>
+
+    <script>
+        const initialCode = `<div id="alert" class="">
+    <span class="text-2xl">✓</span>
+    <div>
+        <p class="font-semibold">Success!</p>
+        <p class="text-sm">Your changes have been saved successfully.</p>
+    </div>
+</div>`;
+
+        window.addEventListener('DOMContentLoaded', () => {
+            updatePreview();
+        });
+
+        function updatePreview() {
+            const code = document.getElementById('code-editor').value;
+            const preview = document.getElementById('preview-container');
+            preview.innerHTML = code;
+        }
+
+        function resetCode() {
+            document.getElementById('code-editor').value = initialCode;
+            updatePreview();
+            document.getElementById('feedback').classList.add('hidden');
+        }
+
+        function checkSolution() {
+            updatePreview();
+
+            const alert = document.getElementById('alert');
+
+            if (!alert) {
+                ArenaValidation.showFailure('Alert element not found! Make sure it has id="alert"');
+                return;
+            }
+
+            const classList = alert.classList;
+
+            const checks = {
+                flex: classList.contains('flex'),
+                itemsCenter: classList.contains('items-center'),
+                gap: classList.contains('gap-3') || classList.contains('gap-4'),
+                background: classList.contains('bg-green-100') || classList.contains('bg-green-50'),
+                border: classList.contains('border-green-400') || classList.contains('border-green-500'),
+                textColor: classList.contains('text-green-800') || classList.contains('text-green-900'),
+                padding: classList.contains('p-4') || classList.contains('p-3'),
+                rounded: classList.contains('rounded-lg') || classList.contains('rounded-xl')
+            };
+
+            const allPassed = Object.values(checks).every(v => v);
+
+            if (allPassed) {
+                ArenaValidation.showSuccess(
+                    'Perfect! You\'ve created a beautiful alert component!',
+                    'zone-01',
+                    'alert'
+                );
+            } else {
+                const missing = [];
+                if (!checks.flex) missing.push('flex');
+                if (!checks.itemsCenter) missing.push('items-center');
+                if (!checks.gap) missing.push('gap-3');
+                if (!checks.background) missing.push('bg-green-100');
+                if (!checks.border) missing.push('border-green-400');
+                if (!checks.textColor) missing.push('text-green-800');
+                if (!checks.padding) missing.push('p-4');
+                if (!checks.rounded) missing.push('rounded-lg');
+
+                ArenaValidation.showFailure('Missing: ' + missing.join(', '));
+            }
+        }
+    </script>
+    <script src="../../engine.js"></script>
+
+</body>
+
+</html>

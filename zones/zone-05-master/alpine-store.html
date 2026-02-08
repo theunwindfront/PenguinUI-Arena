@@ -1,0 +1,228 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Alpine Global Store Challenge</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script defer src="https://cdn.jsdelivr.net/npm/alpinejs@3.x.x/dist/cdn.min.js"></script>
+    <style>
+        [x-cloak] {
+            display: none !important;
+        }
+
+        .code-editor {
+            font-family: 'Courier New', monospace;
+            font-size: 14px;
+            line-height: 1.5;
+            background: #1e293b;
+            color: #e2e8f0;
+            padding: 16px;
+            border-radius: 8px;
+            overflow-x: auto;
+            white-space: pre;
+            tab-size: 4;
+        }
+
+        .code-editor:focus {
+            outline: 2px solid #3b82f6;
+            outline-offset: 2px;
+        }
+    </style>
+</head>
+
+<body class="bg-gradient-to-br from-slate-50 to-amber-50 min-h-screen p-8">
+
+    <div class="max-w-6xl mx-auto">
+
+        <!-- Goal -->
+        <div class="bg-blue-600 text-white p-6 rounded-xl mb-8 shadow-lg">
+            <h2 class="text-2xl font-bold mb-2">🎯 Goal</h2>
+            <p class="text-lg">Use <code class="bg-blue-700 px-2 py-1 rounded">Alpine.store()</code> to create a global
+                "notifications" store. Sync the count between the Header and the Settings panel.</p>
+        </div>
+
+        <!-- Split View -->
+        <div class="grid grid-cols-1 lg:grid-cols-2 gap-6 mb-6">
+
+            <!-- Code Editor -->
+            <div>
+                <h3 class="text-lg font-bold mb-3 text-gray-800">✏️ Edit the Code</h3>
+                <div class="bg-white rounded-xl p-4 shadow-xl">
+                    <textarea id="code-editor" class="code-editor w-full resize-none" rows="25" spellcheck="false"><div id="app-container">
+    <!-- Header with Notification Badge -->
+    <header class="flex justify-between items-center bg-white p-6 rounded-xl shadow-md mb-6">
+        <h2 class="text-xl font-bold">Dashboard</h2>
+        <div class="relative p-2 bg-slate-100 rounded-full">
+            🔔
+            <span id="badge" class="absolute -top-1 -right-1 bg-red-500 text-white text-[10px] w-5 h-5 flex items-center justify-center rounded-full font-bold">
+                0
+            </span>
+        </div>
+    </header>
+
+    <!-- Settings Panel -->
+    <div class="bg-white p-8 rounded-xl shadow-md">
+        <h3 class="text-lg font-bold mb-4">Notification Settings</h3>
+        <p class="mb-6 text-slate-600">Total notifications received: <span id="count-display" class="font-bold text-red-600">0</span></p>
+        
+        <button 
+            id="add-btn"
+            class="px-6 py-3 bg-amber-500 text-white font-bold rounded-lg hover:bg-amber-600"
+        >
+            Receive New Notification
+        </button>
+    </div>
+</div>
+
+<script>
+    document.addEventListener('alpine:init', () => {
+        // Create store here
+    })
+</script></textarea>
+                    <div class="mt-4 flex gap-2">
+                        <button onclick="updatePreview()"
+                            class="px-4 py-2 bg-blue-600 text-white font-semibold rounded-lg hover:bg-blue-700 transition-colors">
+                            Update Preview
+                        </button>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Live Preview -->
+            <div>
+                <h3 class="text-lg font-bold mb-3 text-gray-800">👁️ Live Preview</h3>
+                <div class="bg-slate-200 p-8 rounded-xl min-h-[400px]">
+                    <div id="preview-container"></div>
+                </div>
+            </div>
+
+        </div>
+
+        <!-- Hint -->
+        <div class="mb-6 bg-yellow-50 border-l-4 border-yellow-400 p-4 rounded">
+            <p class="text-yellow-800">
+                <strong>💡 Hint:</strong> Define <code
+                    class="bg-yellow-100 px-2 py-1 rounded">Alpine.store('notifications', { count: 0, add() { this.count++ } })</code>
+                and use <code class="bg-yellow-100 px-2 py-1 rounded">$store.notifications.count</code> in your HTML.
+            </p>
+        </div>
+
+        <!-- Validation -->
+        <div class="flex gap-4">
+            <button onclick="checkSolution()"
+                class="px-8 py-4 bg-gradient-to-r from-green-600 to-emerald-600 hover:from-green-700 hover:to-emerald-700 text-white font-bold rounded-xl shadow-lg transition-all transform hover:scale-105">
+                ✓ Check Solution
+            </button>
+        </div>
+
+        <!-- Feedback -->
+        <div id="feedback" class="mt-6 hidden p-6 rounded-xl font-semibold text-lg"></div>
+
+    </div>
+
+    <script>
+        const initialCode = `<div id="app-container">
+    <!-- Header with Notification Badge -->
+    <header class="flex justify-between items-center bg-white p-6 rounded-xl shadow-md mb-6">
+        <h2 class="text-xl font-bold">Dashboard</h2>
+        <div class="relative p-2 bg-slate-100 rounded-full">
+            🔔
+            <span id="badge" class="absolute -top-1 -right-1 bg-red-500 text-white text-[10px] w-5 h-5 flex items-center justify-center rounded-full font-bold">
+                0
+            </span>
+        </div>
+    </header>
+
+    <!-- Settings Panel -->
+    <div class="bg-white p-8 rounded-xl shadow-md">
+        <h3 class="text-lg font-bold mb-4">Notification Settings</h3>
+        <p class="mb-6 text-slate-600">Total notifications received: <span id="count-display" class="font-bold text-red-600">0</span></p>
+        
+        <button 
+            id="add-btn"
+            class="px-6 py-3 bg-amber-500 text-white font-bold rounded-lg hover:bg-amber-600"
+        >
+            Receive New Notification
+        </button>
+    </div>
+</div>
+
+<script>
+    document.addEventListener('alpine:init', () => {
+        // Create store here
+    })
+<\/script>`;
+
+        window.addEventListener('DOMContentLoaded', () => {
+            updatePreview();
+        });
+
+        function updatePreview() {
+            const rawCode = document.getElementById('code-editor').value;
+            const preview = document.getElementById('preview-container');
+
+            // Extract script
+            const scriptMatch = rawCode.match(/<script>([\s\S]*?)<\/script>/);
+            const htmlContent = rawCode.replace(/<script>[\s\S]*?<\/script>/, '');
+
+            preview.innerHTML = htmlContent;
+
+            if (scriptMatch) {
+                const script = document.createElement('script');
+                script.textContent = scriptMatch[1];
+                preview.appendChild(script);
+            }
+
+            if (window.Alpine) {
+                Alpine.initTree(preview);
+            }
+        }
+
+        function checkSolution() {
+            updatePreview();
+
+            setTimeout(() => {
+                const badge = document.getElementById('badge');
+                const countDisplay = document.getElementById('count-display');
+                const addBtn = document.getElementById('add-btn');
+
+                if (!badge || !countDisplay || !addBtn) {
+                    ArenaValidation.showFailure('Component structure is broken!');
+                    return;
+                }
+
+                const checks = {
+                    hasStore: badge.hasAttribute('x-text') && badge.getAttribute('x-text').includes('$store.notifications'),
+                    hasSync: countDisplay.hasAttribute('x-text') && countDisplay.getAttribute('x-text').includes('$store.notifications'),
+                    hasClick: addBtn.hasAttribute('@click') || addBtn.hasAttribute('x-on:click')
+                };
+
+                const allPassed = Object.values(checks).every(v => v);
+
+                if (allPassed) {
+                    try {
+                        if (Alpine.store('notifications')) {
+                            ArenaValidation.showSuccess('Perfect! Global state management mastered.', 'zone-05', 'alpine-store');
+                        } else {
+                            ArenaValidation.showFailure('Store "notifications" not found in Alpine.store()');
+                        }
+                    } catch (e) {
+                        ArenaValidation.showFailure('Store not properly initialized');
+                    }
+                } else {
+                    const missing = [];
+                    if (!checks.hasStore) missing.push('x-text on badge using $store');
+                    if (!checks.hasSync) missing.push('x-text on display using $store');
+                    if (!checks.hasClick) missing.push('@click on button');
+                    ArenaValidation.showFailure('Missing: ' + missing.join(', '));
+                }
+            }, 100);
+        }
+    </script>
+    <script src="../../engine.js"></script>
+
+</body>
+
+</html>

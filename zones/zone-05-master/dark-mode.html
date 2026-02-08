@@ -1,0 +1,168 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Dark Mode Challenge</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script>
+        tailwind.config = {
+            darkMode: 'class',
+        }
+    </script>
+    <script defer src="https://cdn.jsdelivr.net/npm/alpinejs@3.x.x/dist/cdn.min.js"></script>
+    <style>
+        [x-cloak] {
+            display: none !important;
+        }
+
+        .code-editor {
+            font-family: 'Courier New', monospace;
+            font-size: 14px;
+            line-height: 1.5;
+            background: #1e293b;
+            color: #e2e8f0;
+            padding: 16px;
+            border-radius: 8px;
+            overflow-x: auto;
+            white-space: pre;
+            tab-size: 4;
+        }
+
+        .code-editor:focus {
+            outline: 2px solid #3b82f6;
+            outline-offset: 2px;
+        }
+    </style>
+</head>
+
+<body class="bg-slate-100 min-h-screen p-8" id="body-tag">
+
+    <div class="max-w-6xl mx-auto" x-data="{ darkMode: false }" :class="{ 'dark': darkMode }">
+
+        <!-- Goal -->
+        <div class="bg-blue-600 text-white p-6 rounded-xl mb-8 shadow-lg">
+            <h2 class="text-2xl font-bold mb-2">🎯 Goal</h2>
+            <p class="text-lg">Add dark mode support to the card. Use <code
+                    class="bg-blue-700 px-2 py-1 rounded">dark:bg-slate-800</code>, <code
+                    class="bg-blue-700 px-2 py-1 rounded">dark:text-white</code>, and <code
+                    class="bg-blue-700 px-2 py-1 rounded">dark:border-slate-700</code>.</p>
+        </div>
+
+        <div class="mb-6 flex gap-4">
+            <button @click="darkMode = !darkMode" class="px-6 py-3 bg-slate-800 text-white rounded-lg font-bold">
+                Toggle Dark Mode Preview: <span x-text="darkMode ? 'ON' : 'OFF'"></span>
+            </button>
+        </div>
+
+        <!-- Split View -->
+        <div class="grid grid-cols-1 lg:grid-cols-2 gap-6 mb-6">
+
+            <!-- Code Editor -->
+            <div>
+                <h3 class="text-lg font-bold mb-3 text-gray-800">✏️ Edit the Code</h3>
+                <div class="bg-white rounded-xl p-4 shadow-xl">
+                    <textarea id="code-editor" class="code-editor w-full resize-none" rows="20" spellcheck="false"><div id="dark-card" class="p-8 bg-white border border-slate-200 rounded-2xl shadow-xl transition-colors duration-500">
+    <h3 class="text-2xl font-bold text-slate-900 mb-4">Master Dark Mode</h3>
+    <p class="text-slate-600">This card should look great in both light and dark themes. Fix the background, text, and border classes!</p>
+</div></textarea>
+                    <div class="mt-4 flex gap-2">
+                        <button onclick="updatePreview()"
+                            class="px-4 py-2 bg-blue-600 text-white font-semibold rounded-lg hover:bg-blue-700 transition-colors">
+                            Update Preview
+                        </button>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Live Preview -->
+            <div :class="{ 'dark': darkMode }">
+                <h3 class="text-lg font-bold mb-3 text-gray-800">👁️ Live Preview</h3>
+                <div class="p-12 rounded-xl min-h-[400px] flex items-center justify-center transition-colors duration-500"
+                    :class="darkMode ? 'bg-slate-950' : 'bg-white shadow-2xl'">
+                    <div id="preview-container" class="w-full"></div>
+                </div>
+            </div>
+
+        </div>
+
+        <!-- Hint -->
+        <div class="mb-6 bg-yellow-50 border-l-4 border-yellow-400 p-4 rounded">
+            <p class="text-yellow-800">
+                <strong>💡 Hint:</strong> Add <code class="bg-yellow-100 px-2 py-1 rounded">dark:bg-slate-800</code> to
+                the main div and <code class="bg-yellow-100 px-2 py-1 rounded">dark:text-white</code> to the text
+                elements.
+            </p>
+        </div>
+
+        <!-- Validation -->
+        <div class="flex gap-4">
+            <button onclick="checkSolution()"
+                class="px-8 py-4 bg-gradient-to-r from-green-600 to-emerald-600 hover:from-green-700 hover:to-emerald-700 text-white font-bold rounded-xl shadow-lg transition-all transform hover:scale-105">
+                ✓ Check Solution
+            </button>
+        </div>
+
+        <!-- Feedback -->
+        <div id="feedback" class="mt-6 hidden p-6 rounded-xl font-semibold text-lg"></div>
+
+    </div>
+
+    <script>
+        const initialCode = `<div id="dark-card" class="p-8 bg-white border border-slate-200 rounded-2xl shadow-xl transition-colors duration-500">
+    <h3 class="text-2xl font-bold text-slate-900 mb-4">Master Dark Mode</h3>
+    <p class="text-slate-600">This card should look great in both light and dark themes. Fix the background, text, and border classes!</p>
+</div>`;
+
+        window.addEventListener('DOMContentLoaded', () => {
+            updatePreview();
+        });
+
+        function updatePreview() {
+            const code = document.getElementById('code-editor').value;
+            const preview = document.getElementById('preview-container');
+            preview.innerHTML = code;
+        }
+
+        function checkSolution() {
+            updatePreview();
+            const card = document.getElementById('dark-card');
+            const h3 = card?.querySelector('h3');
+            const p = card?.querySelector('p');
+
+            if (!card || !h3 || !p) {
+                ArenaValidation.showFailure('Component structure is broken!');
+                return;
+            }
+
+            const cardClasses = card.classList;
+            const h3Classes = h3.classList;
+            const pClasses = p.classList;
+
+            const checks = {
+                bg: cardClasses.contains('dark:bg-slate-800') || cardClasses.contains('dark:bg-gray-800'),
+                border: cardClasses.contains('dark:border-slate-700') || cardClasses.contains('dark:border-gray-700'),
+                titleText: h3Classes.contains('dark:text-white') || h3Classes.contains('dark:text-slate-100'),
+                bodyText: pClasses.contains('dark:text-slate-400') || pClasses.contains('dark:text-gray-400') || pClasses.contains('dark:text-white')
+            };
+
+            const allPassed = Object.values(checks).every(v => v);
+
+            if (allPassed) {
+                ArenaValidation.showSuccess('Amazing! Your component is now dark-mode ready.', 'zone-05', 'dark-mode');
+            } else {
+                const missing = [];
+                if (!checks.bg) missing.push('dark:bg-slate-800');
+                if (!checks.border) missing.push('dark:border-slate-700');
+                if (!checks.titleText) missing.push('dark:text-white');
+                if (!checks.bodyText) missing.push('dark:text-slate-400');
+                ArenaValidation.showFailure('Missing dark variants: ' + missing.join(', '));
+            }
+        }
+    </script>
+    <script src="../../engine.js"></script>
+
+</body>
+
+</html>
