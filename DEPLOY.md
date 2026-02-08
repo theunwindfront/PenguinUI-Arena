@@ -19,10 +19,10 @@ git push origin main
 ### Step 3: Visit Your Game!
 Your game will be live at:
 ```
-https://YOUR-USERNAME.github.io/YOUR-REPO-NAME/
+https://theunwindfront.github.io/PenguinUI-Arena/
 ```
 
-Example: `https://theunwindfront.github.io/Tailwind-Alpine-Dojo/`
+Example: `https://theunwindfront.github.io/PenguinUI-Arena/`
 
 ---
 

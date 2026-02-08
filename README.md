@@ -16,7 +16,7 @@ PenguinUI Arena is a **fully playable online learning game** where you master fr
 ## 🚀 How to Play
 
 ### 🌐 Play Online (Recommended)
-1. Visit the live game at: `https://yourusername.github.io/repository-name`
+1. Visit the live game: **[https://theunwindfront.github.io/PenguinUI-Arena/](https://theunwindfront.github.io/PenguinUI-Arena/)**
 2. Click on any unlocked challenge
 3. Edit the code in the built-in editor
 4. Click "Update Preview" to see your changes
